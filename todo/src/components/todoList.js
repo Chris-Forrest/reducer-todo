@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const todoList = (props) => {
+const TodoList = (props) => {
 
 
     return(
@@ -11,4 +11,4 @@ const todoList = (props) => {
     )
 
 }
-export const todoList;
+export default TodoList;

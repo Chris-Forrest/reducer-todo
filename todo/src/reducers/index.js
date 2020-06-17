@@ -1,6 +1,6 @@
 /****************initialState todoList ******************************/
 
-export const initialState = [
+export const todos = [
     {
         item: 'Learn about reducers',
         completed: false,
@@ -12,7 +12,7 @@ export const initialState = [
         id: 3892987432
       },
       {
-        item: 'Clean Garage',
+        item: 'Learn Redux',
         completed: false,
         id: 3892987555
       }
@@ -20,10 +20,18 @@ export const initialState = [
 
 /************************Reducer  ********************************************/
 
-export const addTodo = (state, action) => {
+export const reducer = (state, action) => {
     switch(action.type){
         case 'ADD_TODO':
-            return;
+            const newTodo = {
+                item: action.payload,
+                completed: false,
+                id: Date.now(),
+            }
+            return {
+                ...state,
+                todos:[...state.todos, newTodo ]
+            }
         default:
                 return state;
     };

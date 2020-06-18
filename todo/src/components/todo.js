@@ -1,8 +1,10 @@
 import React from 'react';
 
-const todo = (props) => {
+const todo = props => {
 
-
+    const handleClick = () => {
+        props.completeTodo(props.todo.id)
+    }
 
     return (
         <div className="todo-container">

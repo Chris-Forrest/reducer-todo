@@ -1,39 +1,85 @@
 /****************initialState todoList ******************************/
 
-export const todos = [
+export const initialState = {
+   // inputValue:'',
+    todos: [
     {
-        item: 'Learn about reducers',
+        task: 'Learn about Reducers',
         completed: false,
         id: 3892987589
       },
       {
-        item: 'Bake Sourdough Bread',
+        task: 'Bake Sourdough Bread',
         completed: false,
         id: 3892987432
       },
       {
-        item: 'Learn Redux',
+        task: 'Learn Redux',
         completed: false,
         id: 3892987555
       }
-]
+  ]
+}
 
 /************************Reducer  ********************************************/
-
 export const reducer = (state, action) => {
+
     switch(action.type){
-        case 'ADD_TODO':
-            const newTodo = {
-                item: action.payload,
-                completed: false,
+        case "ADD_TODO":
+            const newTodo ={
+                name: action.payload,
+                completed:false,
                 id: Date.now(),
             }
             return {
                 ...state,
-                todos:[...state.todos, newTodo ]
+                todos:[...state.todos, newTodo],
             }
-        default:
-                return state;
-    };
-   
+        case 'TOGGLE_TODO':
+
+      return {
+        ...state,
+        todos: state.todos.map(todo =>
+          todo.id === action.payload
+            ? { ...todo, completed: !todo.completed }
+            : todo
+        ),
+      };
+
+        case 'CLEAR_COMPLETED':
+         return {
+           ...state,
+            todos: state.todos.filter(todo => !todo.completed),
+      };
+    }
+
 };
+
+
+
+/*
+export const reducer = (state, action) => {
+    switch (action.type) {
+      case "ADD_TODO":
+        if (state.inputValue) {
+          return {
+            ...state,
+            todos: [
+              ...state.todos,
+              {
+                task: state.inputValue,
+                id: Date.now(),
+                completed: false,
+              },
+            ],
+          }
+        }
+      case "INPUT_TEXT":
+        return {
+          ...state,
+          inputValue: action.payload,
+        }
+      default:
+        return state;
+    }
+  } */

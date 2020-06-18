@@ -1,5 +1,7 @@
 import React from 'react';
 
+/*****************not using this component at all did it all in todoList.js *****************************/
+
 const Todo = ({ taskName, completed, id, toggleCompleted}) => {
 
    console.log("taskNames go here", taskName);

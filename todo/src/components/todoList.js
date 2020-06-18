@@ -15,7 +15,8 @@ const TodoList = ({ state, dispatch}) => {
                    <h3 onClick={() => {
                        dispatch({ type: "TOGGLE_TODO", payload: todo.id });
                        console.log('clicked')
-                   }}>{todo.taskName}</h3>
+                   }}
+                   key={todo.id}>{todo.taskName}</h3>
                </div>
            ))}
            <button onClick={() => {

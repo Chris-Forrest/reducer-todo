@@ -1,16 +1,26 @@
-import React, { useReducer } from 'react';
-import { initialState, reducer } from '../reducers'
+import React,{ useReducer } from 'react';
+//import { reducer, initialState } from '../reducers';
+import './todo.css';
 
 
-const TodoList = () => {
+const TodoList = ({ state, dispatch}) => {
 
-    const [state, dispatch ] = useReducer( reducer, initialState)
+   // const [ state, dispatch] = useReducer(reducer, initialState)
 
+    //console.log("todoList stuff", state.todos)
     return(
         <div className="todoList-container">
            {state.todos.map(todo => (
-               <h3 >{todo.item}</h3>
+               <div className={todo.completed ? 'completed' : ''}>
+                   <h3 onClick={() => {
+                       dispatch({ type: "TOGGLE_TODO", payload: todo.id });
+                       console.log('clicked')
+                   }}>{todo.taskName}</h3>
+               </div>
            ))}
+           <button onClick={() => {
+               dispatch({ type: "CLEAR_COMPLETED"});
+           }}>Clear Completed Todo</button>
         </div>
     )
 

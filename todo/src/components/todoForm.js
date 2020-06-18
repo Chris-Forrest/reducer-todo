@@ -1,24 +1,40 @@
-import React from 'react';
-import { useInput } from '../hooks/useInput';
+import React,{ useState, useReducer } from 'react';
+//import { reducer, initialState } from '../reducers';
 
+const TodoForm = ({ dispatch, state }) => {
 
-const TodoForm = () => {
-    const [inputedTodo, setInputedTodo, handleChanges] = useInput('');
+    const [taskName, setTaskName] = useState('');
+   // const [state, dispatch] = useReducer( reducer, initialState)
 
+   const submitTodo = e => {
+       e.preventDefault();
+       if(taskName){
+           dispatch({ type: "ADD_TODO", payload: taskName});
+           clearForm();
+           console.log('new todo from form', taskName)
+       }
+   }
+
+    const changeHandler = e => {
+        setTaskName(e.target.value)
+    }
+
+    const clearForm = () => {
+        setTaskName('');
+    }
     
-
     return (
-        <form>
+        <form onSubmit={submitTodo} >
             <label htmlFor="todo-input">New Task </label>
             <input 
             type="text"
-            name="inputedTodo"
+            name="todoInput"
             placeholder="new todo"
-            onChange={ e => handleChanges(e.target.value)}
-            value={inputedTodo}
+            onChange={changeHandler}
+            value={taskName}
             />
-
-            <button>Add Task</button>
+           <button>Add Task</button>
+          
         </form>
     )
 
